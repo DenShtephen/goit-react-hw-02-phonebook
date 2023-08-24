@@ -12,18 +12,10 @@ export class ContactForm extends Component {
     evt.preventDefault();
     const { name, number } = this.state;
 
-    const nameExists = this.props.contacts.some(
-      contact => contact.name === name
-    );
-
-    if (nameExists) {
-      alert(`"${name}" is already in contacts.`);
-    } else {
-      const id = nanoid();
-      const newContact = { id, name, number };
-      this.props.onSubmit(newContact);
-      this.setState({ name: '', number: '' });
-    }
+    const id = nanoid();
+    const newContact = { id, name, number };
+    this.props.onSubmit(newContact);
+    this.setState({ name: '', number: '' });
   };
 
   handleNameChange = evt => {

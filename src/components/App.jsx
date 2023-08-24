@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import { ContactForm } from './Contacts/ContactForm';
-import { ContactList } from './Contacts/ContactList';
-import { Filter } from './Input/Filter';
+import { ContactForm } from './ContactForm/ContactForm';
+import { ContactList } from './ContactList/ContactList';
+import { Filter } from './Filter/Filter';
 import { Section } from './Section/Section';
 
 export class App extends Component {
@@ -16,9 +16,19 @@ export class App extends Component {
   };
 
   addContact = newContact => {
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, newContact],
-    }));
+    const { contacts } = this.state;
+
+    const nameExists = contacts.some(
+      contact => contact.name === newContact.name
+    );
+
+    if (nameExists) {
+      alert(`"${newContact.name}" is already in contacts.`);
+    } else {
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, newContact],
+      }));
+    }
   };
 
   handleFilterChange = evt => {
